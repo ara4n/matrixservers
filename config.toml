@@ -10,7 +10,7 @@ canonifyURLs = true
 post = "/:title/"
 
 [imaging]
-quality = 70
+quality = 68
 
 [caches]
 [caches.getjson]
