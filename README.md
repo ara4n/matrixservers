@@ -60,4 +60,3 @@ Website: [matrixservers.net](https://matrixservers.net)
 **Founded:** May 31st 2019  
 **Web client:** https://neo.pixie.town/app  
 **Description:** Semi-public Matrix server part of the https://pixie.town services. For an account contact f0x or email f at 0x52 dot eu  
-# matrixservers

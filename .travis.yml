@@ -1,0 +1,32 @@
+dist: xenial
+sudo: required
+language: node_js
+node_js:
+- lts/*
+install:
+- wget "https://github.com/gohugoio/hugo/releases/download/v${HUGO_RELEASE}/hugo_extended_${HUGO_RELEASE}_Linux-64bit.deb"
+- sudo dpkg -i hugo*.deb
+script:
+- hugo version
+- hugo --minify
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_5cb8758ffce0_key -iv $encrypted_5cb8758ffce0_iv
+  -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+- eval "$(ssh-agent -s)"
+- chmod 600 /tmp/deploy_rsa
+- ssh-add /tmp/deploy_rsa
+- echo -e "Host ${DEPLOY_HOST}\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+- echo -e "Port 7685" >> ~/.ssh/config
+deploy:
+  provider: script
+  skip-cleanup: true
+  script: rsync -r --quiet --delete-after ${TRAVIS_BUILD_DIR}/public/* ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIRECTORY}
+  on:
+    branch: master
+env:
+  global:
+  - PRODUCTION=true
+  - HUGO_RELEASE=0.55.6
+  - secure: wBWNyXJBG+AAZTNZ4xl+K/iRtkz4NhvepbB91eQOFlLJvd0VNuKAvYiXZgsKOGB++G2VuYoDeyxN7pGXN2dgTlT5GFqvjX1mCBj0H11I9bf5KH6B5CPKE4CLnueyAkir/bF8SHmgZsd4PtIB1YVTGS3zkWAmNcjlfWY0LKr9xFNAL4JiOkH+UIIVKNuKa1dng4XMnkBxLJx/K6EHHI9rRtKj6UpImlu17/FUVufVoHg1Ei4mSe4KulYpKZ3ejZP4w6EU5CJKpQCEKO6Q9OflDmU6QPZvmsFYmPcvHpP2ldNYvK3NodSqMFgKsB1hbCSnhAkpIxy4EP1uUGX6EKpkVpTHkkszrwe2ueNFiMxFxadYM3dsRFf5iV9VqhQyFkXIjGMQiDm6Rz9NCYKpMJp5woR2JZVVCj1YMqwlWnaoZo/e6SCXJn5FPUsdndhNOd36VJ26RT3n0HJypSQiPJkznH6Zneze2F1q4dufizXhDqFWALHqTJFmVrGWvq4KnByK54fk6tsF+LlnWJUuDY9/PZRzcYFV5uteAhkOQHy/fW7/KiMtiQuv8a/lt1YGUuN0klPsiXzrfPEJxop8wTKEQj0Eb790LQWWHevTzZZTcdeS69XRbhOhU/wYFxMY9goalLPZJOnIMCUxl9TH0GVXhojwM9X49bqXCAJmz1rmOvE=
+  - secure: UTgHe+ZI595rIrYk99bmjZYI3Z1XNGCARlnMwQAMz0Yrz8FJ5wlgyKIg1Eaw+3N9tCIUuc2uvwEFF9Xa466cnwqQIticMmbm1EfBD0FXpdbG3nt6clOUz3m6/T4IhXhps/CbJdTD2EmTU1PJsqsxmFFjNtzUYs3MEvUAP/gSQe2SW2SnoaXABahF0uUB93UQIk6n4C2CegsHXqqkr78PfANFjr4b3Yq6lWifBdAMINubT765rticmw0/bIrSJNoPf4LMNugE2OA7NJfwYz3b1dCQrQSVGQ8cT6Gd5AVtvJ1RUH9Id8PMM252RhBTUXlUtRwFKw5qFFgsrYQfhd0QrbPfV0I2B55Gk0/ggmwwte2kjmSoUZ77Egj3juRkdlUsxywtxM5E2PZYpRw+ufyMZCso3YgSSQb05x26qU/xcwLmq27HMoLxMcyRjatiLH1ZeY7Kledp3KeL5dOPmG9CU59bsXslLWuqeH9wOqyZVUGaxSjl+68xg/YP+h6WnAUQ6W29voe9D8R9j2jdheWtxGBF9Zp6di5XjkFLgkam6HOTZdE7tlal0coptjgyhr4kO+WA/tVa7XCht5/gZ/h6fHEJ7ld2N1znwkEWAYCr2ioDRP8wdX1x5NRVpqbnWVYmN3PRU8NOFYBjCdI3An31j05tCUt65WeGT8FzgoynCn0=
+  - secure: qGw7VIzomybJIjZBJQVoHU3uxliRWtb6xcwQ2/sLBfJo1QuP273WNXWCmUiVikoqhL0KLGqeJnbLSCu683wloQHFKpalXUtRw+IeJ5xBrsJfdogzctjH9JS6GoyFpJ9+w/J1DDnzt7anoNM3Utazulc0pUNtP7S2LcdGxWArohWQG9VhxqYVnQtBW72w9r8FVsEbh1OQ3il5yE0IGszYrZn6RbYSbNwJp3qC3aTMqgdgSRXc27W69yf4c2R5eAdc2VdSksiZdp0C541FRMDBnlFzGwvcN6XoTKtX3R2d8OHhJBwjVAQ5EO39jXbtdpM4LpbTbHtHceghuEGc/NqRleKIxX3iwqJzYnE3aCtt/m1s1kE2rI7XAQ0OGyoLnrbJgmt38mZlfcRuEBZK0jwhY5lM006CGuS4bWMGa0TDtMPsvQ9ZTMdMk/HXaywu6CeDJYSEN5IfqP+xbKHZZOb2+Zrf92lXQexTYM6lBretT+lMt/c7okoCBElp19/JElgqe2g1q7HWcMaJ12LF47QVYVfBKq5cX/QaKjO+AOTM2LwBpRBHpCTfj+ekuCDRvyvB7iGrhaL4D8P96VeXYhyVADdZapmx5gdAXep3qFluJFP0qNKYY0RdII3m8ngvN/NAWjfOMyM3sdcpv5uAVY4eQFteZT0JMhD82oiqQ0tULbw=

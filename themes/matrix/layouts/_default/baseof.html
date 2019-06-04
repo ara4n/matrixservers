@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en_US">
+  {{ partial "head" . }}
+
+  <body>
+    {{ partial "header" . }}
+
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-md-12">
+
+        {{ block "body" . }}
+        {{ end }}
+
+        </div>
+      </div>
+    </div>
+
+    {{ partial "footer" . }}
+    {{ partial "javascript" . }}
+
+  </body>
+</html>

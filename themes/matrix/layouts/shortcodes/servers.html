@@ -1,0 +1,37 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Server</th>
+      <th scope="col">Version</th>
+      <th scope="col">Uptime</th>
+      <th scope="col">Maintainer</th>
+      <th scope="col">Support</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ $api := getJSON "https://api.matrixservers.net/_/items/servers" }}
+    {{ range shuffle $api.data }}
+    {{ $domain := .domain }}
+    {{ $port := .fport }}
+    {{ $v := getJSON "https://" $domain ":" $port "/_matrix/federation/v1/version" }}
+    {{ $version := $v.server.version }}
+    <tr>
+      <td>{{ .domain }}</td>
+      <td>{{ $version }}</td>
+      <td><a href="https://stats.matrixservers.net/service/{{ .domain | safeHTML }}" target="_blank" rel="nofollow">Stats</a></td>
+      {{ if .maintainer }}
+      <td><a href="https://matrix.to/#/{{ .maintainer | safeHTML }}" target="_blank" rel="nofollow">Contact</td>
+        {{ else }}
+      <td>Unknown</td>
+      {{ end }}
+      {{ if .support }}
+      <td><a href="https://matrix.to/#/{{ .support | safeHTML }}" target="_blank" rel="nofollow">Support</td>
+        {{ else }}
+      <td>Unknown</td>
+      {{ end }}
+      <td>{{ .description }}</td>
+    </tr>
+    {{ end }}
+  </tbody>
+</table>

@@ -1,0 +1,43 @@
+baseURL = "/"
+languageCode = "en-us"
+title = "Matrix Servers"
+shorttitle = "Matrix Servers"
+theme = "matrix"
+enableRobotsTXT = true
+canonifyURLs = true
+
+[permalinks]
+post = "/:title/"
+
+[imaging]
+quality = 70
+
+[caches]
+[caches.getjson]
+dir = ":cacheDir/:project"
+maxAge = 3600
+[caches.getcsv]
+dir = ":cacheDir/:project"
+maxAge = 3600
+[caches.images]
+dir = ":resourceDir/_gen"
+maxAge = 3600
+[caches.assets]
+dir = ":resourceDir/_gen"
+maxAge = 3600
+
+[[menu.main]]
+    name = "Home"
+    url = "/"
+    pre = "<i class='now-ui-icons education_atom'></i>"
+    weight = 1
+[[menu.main]]
+    name = "Servers"
+    url = "/servers"
+    pre = ""
+    weight = 2
+[[menu.main]]
+    name = "About"
+    url = "/about"
+    pre = ""
+    weight = 3

@@ -1,0 +1,35 @@
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/style.css">
+
+  <title>{{ .Title | default .Site.Title }} {{ if not .IsHome }} - {{ .Site.Title }} {{ end }}</title>
+
+  <meta name="description" content="{{ .Params.Meta | default .Site.Params.Description}}"/>
+
+  {{ if and (eq .Kind "taxonomy") (eq .Type "categories")}}
+  <meta name="robots" content="noindex, follow"/>
+  {{ else }}
+  <meta name="robots" content="index, follow"/>
+  {{ end }}
+
+  {{ if or (eq .Kind "home") (eq .Kind "page")}}
+  {{ if isset .Params "canonical" }}
+  <link rel="canonical" href="{{ .Params.Canonical}}" />
+  {{ else }}
+  <link rel="canonical" href="{{ .Permalink}}" />
+  {{ end }}
+  {{ end }}
+
+{{ partial "favicon" . }}
+
+{{ partial "schema" . }}
+</head>

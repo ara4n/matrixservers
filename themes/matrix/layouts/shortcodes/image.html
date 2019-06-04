@@ -1,0 +1,17 @@
+{{ $altText := .Get "alt"}}
+{{ $caption := .Get "caption"}}
+{{ with $.Page.Resources.GetMatch (.Get "name") }}
+  <figure>
+    <a href="{{.RelPermalink}}">
+      <img
+        srcset="
+          {{ (.Resize "320x").RelPermalink }} 320w,
+          {{ (.Resize "768x").RelPermalink }} 768w,
+          {{ (.Resize "1200x").RelPermalink }} 2x"
+        src="{{ (.Resize "768x").RelPermalink }}" alt="{{$altText}}"/>
+    </a>
+    <figcaption><p>{{ $caption }}</p></figcaption>
+  </figure>
+{{ else }}
+  could not find image
+{{ end }}

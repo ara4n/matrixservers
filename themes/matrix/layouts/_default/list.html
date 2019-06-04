@@ -1,0 +1,30 @@
+<div class="container justify-content-center">
+  <div class="row">
+  {{ range .Paginator.Pages }}
+    <div class="card-body">
+        <!-- Tab panes -->
+     {{if .Params.image }}
+     <img src="{{ .Params.image  | absURL }}"  class="rounded" height="100px"/>
+     {{ end }}
+     {{.Summary}}
+     {{ if .Truncated }}
+      <div>
+        <a href="{{ .RelPermalink }}">Read More…</a>
+      </div>
+     {{ end }}
+     {{ end }}
+    </div>
+  </div>
+</div>
+{{ if or (.Paginator.HasPrev) (.Paginator.HasNext) }}
+<nav>
+  <ul class="pager">
+    {{ if .Paginator.HasPrev }}
+    <li><a href="{{ .Paginator.Prev.URL | relURL }}">&laquo; Previous</a></li>
+    {{ end }}
+    {{ if .Paginator.HasNext }}
+    <li><a href="{{ .Paginator.Next.URL | relURL }}">Next &raquo;</a></li>
+    {{ end }}
+  </ul>
+</nav>
+{{ end }}
