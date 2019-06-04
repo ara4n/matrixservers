@@ -27,17 +27,18 @@ dir = ":resourceDir/_gen"
 maxAge = 3600
 
 [[menu.main]]
-    name = "Home"
-    url = "/"
-    pre = "<i class='now-ui-icons education_atom'></i>"
-    weight = 1
+  name = "Home"
+  url = "/"
+  weight = 1
 [[menu.main]]
-    name = "Servers"
-    url = "/servers"
-    pre = ""
-    weight = 2
+  name = "Servers"
+  url = "/servers"
+  weight = 2
 [[menu.main]]
-    name = "About"
-    url = "/about"
-    pre = ""
-    weight = 3
+  name = "About"
+  url = "/about"
+  weight = 3
+[[menu.main]]
+  name = "Add Server"
+  url = "https://github.com/Atreatis/matrixservers"
+  weight = 4
