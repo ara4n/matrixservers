@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://matrixsevers.net"
 languageCode = "en-us"
 title = "Matrix Servers"
 shorttitle = "Matrix Servers"
