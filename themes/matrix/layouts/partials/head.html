@@ -5,11 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+  <link rel="preload" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><noscript><link rel="stylesheet" href="../css/bootsatrap.min.css"></noscript>
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preload" href="../css/style.css" as='style' onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="../css/style.css"></noscript>
+  <style>
+    .block {
+      width: 100%;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      letter-spacing: 0.025em;
+    }
+
+    .block-img-overlay {
+      color: #fff;
+      height: 100%;
+      padding: 15px 1rem;
+      background-color: rgba(25, 25, 25, 0.62);
+    }
+  </style>
 
   <title>{{ .Title | default .Site.Title }} {{ if not .IsHome }} - {{ .Site.Title }} {{ end }}</title>
 
