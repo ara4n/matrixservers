@@ -1,0 +1,10 @@
+{{ define "body" }}
+<div class="row">
+  <div class="col-md-10 ml-auto mr-auto text-left">
+  {{ .Content }}
+    <br>
+    <h3>Public Matrix Server List</h3>
+  {{ partial "servers" }}
+  </div>
+</div>
+{{ end }}
