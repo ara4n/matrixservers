@@ -62,8 +62,15 @@ Website: [matrixservers.net](https://matrixservers.net)
 **Description:** Semi-public Matrix server part of the https://pixie.town services. For an account contact f0x or email f at 0x52 dot eu  
 
 **Server name:** Matrix.org  
-**Domain:** https://matrix.org
-**Maintainer:** @matthew:matrix.org
-**Founded:** Aug 13th 2014
-**Web client:** https://riot.im/app
-**Description:** The first ever Matrix server, as run by the matrix.org core dev team.  Can get overloaded.
+**Domain:** https://matrix.org  
+**Maintainer:** @matthew:matrix.org  
+**Founded:** Aug 13th 2014  
+**Web client:** https://riot.im/app  
+**Description:** The first ever Matrix server, as run by the matrix.org core dev team.  Can get overloaded.  
+
+**Server name:** envs.net  
+**Domain:** https://matrix.envs.net  
+**Maintainer:** @creme.envs.net  
+**Founded:** since 9/2019  
+**Web client:** https://element.envs.net  
+**Description:** envs.net is a minimalist, non-commercial shared linux system and will always be free to use.  
